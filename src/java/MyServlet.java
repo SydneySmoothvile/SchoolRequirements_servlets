@@ -46,45 +46,6 @@ public class MyServlet extends HttpServlet {
             out.println("</body>");
             out.println("</html>");
             
-            // connecting to database
-            Connection con = null;  
-            Statement stmt = null;
-            ResultSet rs = null;
-            
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-                con =DriverManager.getConnection ("jdbc:mysql://localhost:3307/school_requirement","root","");
-                stmt = con.createStatement();
-                rs = stmt.executeQuery("SELECT * FROM school_requirement");
-                
-                // displaying records
-                while(rs.next()){
-                    out.println(rs.getString(1));
-                    out.println("\t\t\t");
-                    out.println(rs.getString(2));
-                    out.println("<br>");
-                    }
-                } catch (SQLException e) {
-                        throw new ServletException("Servlet Could not display records.", e);
-                } catch (ClassNotFoundException e) {
-                        throw new ServletException("JDBC Driver not found.", e);
-                } finally {
-                    try {
-                        if(rs != null) {
-                        rs.close();
-                        rs = null;
-                    }
-                    if(stmt != null) {
-                        stmt.close();
-                        stmt = null;
-                    }
-                    if(con != null) {
-                        con.close();
-                        con = null;
-                    }
-                    } catch (SQLException e) {}
-                }
-                    out.close();
             }
         }
     }
